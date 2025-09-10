@@ -4,6 +4,9 @@
  */
 package Visual;
 
+import Clases.*;
+import java.util.TreeSet;
+
 /**
  *
  * @author necoi
@@ -11,7 +14,10 @@ package Visual;
 public class Menu extends javax.swing.JFrame {
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(Menu.class.getName());
-    private Personalizados.Escritorio escritorio; //Se crea objeto tipo escritorio
+    public Personalizados.Escritorio escritorio; //Se crea objeto tipo escritorio
+    
+    
+    
     /**
      * Creates new form Menu
      */
@@ -140,6 +146,8 @@ public class Menu extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(() -> new Menu().setVisible(true));
     }
 
+    public static Super superPC = new Super();
+    public static TreeSet<Producto> productos = new TreeSet<>();    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenu jmAdministracion;
     private javax.swing.JMenu jmConsultas;

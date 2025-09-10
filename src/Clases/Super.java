@@ -9,6 +9,10 @@ import java.util.TreeMap;
 
 public class Super {
     private TreeMap<Long,Producto> productos = new TreeMap(); // TreeMap<codigo,Producto>;
+
+    public Super() {
+    }
+    
     
 //METODO PARA AGREGAR PRODUCTO AL ARREGLO     
 public void agregarProducto(Long cod, Producto pr){
