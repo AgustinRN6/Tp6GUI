@@ -11,12 +11,14 @@ package Visual;
 public class Menu extends javax.swing.JFrame {
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(Menu.class.getName());
-
+    private Personalizados.Escritorio escritorio; //Se crea objeto tipo escritorio
     /**
      * Creates new form Menu
      */
     public Menu() {
         initComponents();
+        escritorio = new Personalizados.Escritorio(); //Se inicializa escritorio
+        this.setContentPane(escritorio); //Coloca el escritorio en el JFrame
     }
 
     /**
@@ -28,7 +30,6 @@ public class Menu extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jdpEscritorio = new javax.swing.JDesktopPane();
         jmbMenuOpciones = new javax.swing.JMenuBar();
         jmAdministracion = new javax.swing.JMenu();
         jmiAgregar = new javax.swing.JMenuItem();
@@ -41,17 +42,6 @@ public class Menu extends javax.swing.JFrame {
         jmSalir = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-
-        javax.swing.GroupLayout jdpEscritorioLayout = new javax.swing.GroupLayout(jdpEscritorio);
-        jdpEscritorio.setLayout(jdpEscritorioLayout);
-        jdpEscritorioLayout.setHorizontalGroup(
-            jdpEscritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 650, Short.MAX_VALUE)
-        );
-        jdpEscritorioLayout.setVerticalGroup(
-            jdpEscritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 455, Short.MAX_VALUE)
-        );
 
         jmAdministracion.setText("administracion");
 
@@ -103,11 +93,11 @@ public class Menu extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jdpEscritorio)
+            .addGap(0, 650, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jdpEscritorio)
+            .addGap(0, 455, Short.MAX_VALUE)
         );
 
         pack();
@@ -151,7 +141,6 @@ public class Menu extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JDesktopPane jdpEscritorio;
     private javax.swing.JMenu jmAdministracion;
     private javax.swing.JMenu jmConsultas;
     private javax.swing.JMenu jmSalir;
