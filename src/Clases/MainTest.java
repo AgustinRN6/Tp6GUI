@@ -50,8 +50,8 @@ public class MainTest {
         System.out.println(".........................................................");
     //FILTRAR POR NOMBRE
         System.out.println("METODO FILTRAR POR NOMBRE");
-    for(Producto p: DeTodoSA.filtrarPorNombre("Mar")){
-        System.out.println(p.getProducto());
+    for(Map.Entry<Long, Producto> p: DeTodoSA.filtrarPorNombre("Mar").entrySet()){
+        System.out.println(p.getValue().getProducto());
     }
       System.out.println(".........................................................");
     //FILTRAR POR PRECIO

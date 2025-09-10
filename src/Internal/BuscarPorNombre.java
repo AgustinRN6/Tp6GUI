@@ -4,17 +4,28 @@
  */
 package Internal;
 
+import Clases.Producto;
+import java.util.Map;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author Agustin
  */
 public class BuscarPorNombre extends javax.swing.JInternalFrame {
-
+    
+    private DefaultTableModel modelo = new DefaultTableModel(){
+    public boolean isCellEditable(int fila, int columna){ //Metodo que permite editar filas o columna.
+        return false;//En este caso no
+    }
+    };
     /**
      * Creates new form BuscarPorNombre
      */
     public BuscarPorNombre() {
         initComponents();
+        armarTabla();
     }
 
     /**
@@ -28,28 +39,94 @@ public class BuscarPorNombre extends javax.swing.JInternalFrame {
 
         jpPanelPrincipal = new javax.swing.JPanel();
         lbTitulo = new javax.swing.JLabel();
+        lbIngreseDescripcion = new javax.swing.JLabel();
+        txtDescripcion = new javax.swing.JTextField();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jtTablaProductos = new javax.swing.JTable();
+        btSalir = new javax.swing.JButton();
 
+        jpPanelPrincipal.setBackground(new java.awt.Color(165, 186, 226));
         jpPanelPrincipal.setBorder(javax.swing.BorderFactory.createCompoundBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 2, true), javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0))));
 
         lbTitulo.setFont(new java.awt.Font("Arial", 1, 24)); // NOI18N
         lbTitulo.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         lbTitulo.setText("Listado por NOMBRE");
 
+        lbIngreseDescripcion.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        lbIngreseDescripcion.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lbIngreseDescripcion.setText("Ingrese descripcion:");
+
+        txtDescripcion.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        txtDescripcion.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        txtDescripcion.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtDescripcionKeyPressed(evt);
+            }
+        });
+
+        jScrollPane1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+
+        jtTablaProductos.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane1.setViewportView(jtTablaProductos);
+
+        btSalir.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btSalir.setForeground(new java.awt.Color(0, 204, 204));
+        btSalir.setText("Salir");
+        btSalir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btSalirActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jpPanelPrincipalLayout = new javax.swing.GroupLayout(jpPanelPrincipal);
         jpPanelPrincipal.setLayout(jpPanelPrincipalLayout);
         jpPanelPrincipalLayout.setHorizontalGroup(
             jpPanelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jpPanelPrincipalLayout.createSequentialGroup()
-                .addGap(78, 78, 78)
-                .addComponent(lbTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, 369, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(244, Short.MAX_VALUE))
+                .addGap(20, 20, 20)
+                .addGroup(jpPanelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jpPanelPrincipalLayout.createSequentialGroup()
+                        .addComponent(lbIngreseDescripcion, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(txtDescripcion, javax.swing.GroupLayout.PREFERRED_SIZE, 271, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(jpPanelPrincipalLayout.createSequentialGroup()
+                        .addComponent(lbTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, 369, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap())
+            .addGroup(jpPanelPrincipalLayout.createSequentialGroup()
+                .addGap(48, 48, 48)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 529, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(80, Short.MAX_VALUE))
         );
         jpPanelPrincipalLayout.setVerticalGroup(
             jpPanelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jpPanelPrincipalLayout.createSequentialGroup()
-                .addGap(14, 14, 14)
-                .addComponent(lbTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(442, Short.MAX_VALUE))
+                .addGroup(jpPanelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jpPanelPrincipalLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(lbTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jpPanelPrincipalLayout.createSequentialGroup()
+                        .addGap(23, 23, 23)
+                        .addComponent(btSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jpPanelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lbIngreseDescripcion, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtDescripcion, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 349, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(19, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -72,9 +149,53 @@ public class BuscarPorNombre extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btSalirActionPerformed
+        // TODO add your handling code here:
+        System.out.println(evt.getActionCommand());
+        setVisible(false);
+    }//GEN-LAST:event_btSalirActionPerformed
+
+    private void txtDescripcionKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtDescripcionKeyPressed
+        // TODO add your handling code here:
+        
+       String descripcion = txtDescripcion.getText();
+        System.out.println(descripcion);
+    }//GEN-LAST:event_txtDescripcionKeyPressed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btSalir;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JPanel jpPanelPrincipal;
+    private javax.swing.JTable jtTablaProductos;
+    private javax.swing.JLabel lbIngreseDescripcion;
     private javax.swing.JLabel lbTitulo;
+    private javax.swing.JTextField txtDescripcion;
     // End of variables declaration//GEN-END:variables
+private void validarCampos(){
+    if(txtDescripcion.equals(false)){
+    JOptionPane.showMessageDialog(null, "Usted no ha ingresado una descripcion!!!!");
+    }
+}
+private void armarTabla(){
+  modelo.addColumn("Codigo");
+  modelo.addColumn("Descripcion");
+  modelo.addColumn("Precio");
+  modelo.addColumn("Categoria");
+  modelo.addColumn("Descripcion");
+  jtTablaProductos.setModel(modelo);
+}
+private void cargarTabla(){
+    borrarTabla();
+    /*for(Map.Entry<Long, Producto>produ: falta el directivo static ){
+        modelo.addRow(new Object[]{                               });
+    }
+  */  
+}
+private void borrarTabla(){
+    int ind = modelo.getRowCount() -1 ;
+    for (int i = ind; i <= 0; i--) {
+     modelo.removeRow(i);
+    }
+}
 }

@@ -2,6 +2,7 @@
 package Clases;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.Map;
 import java.util.TreeMap;
 
@@ -41,11 +42,13 @@ public ArrayList<Producto> filtrarPorCategoria(String cat){
     return productosCat;//retorna el arreglo.
 }
 //METODO QUE FILTRA PRODUCTOS SEGUN EL NOMBRE
-public ArrayList<Producto> filtrarPorNombre(String descr){
-    ArrayList<Producto>productosNom = new ArrayList();
-        for(Producto pro: productos.values()){
-            if(pro.getDescripcion().startsWith(descr)){
-                productosNom.add(pro);
+public TreeMap<Long, Producto> filtrarPorNombre(String descr){
+    TreeMap<Long,Producto>productosNom = new TreeMap();
+    
+        for(Map.Entry<Long,Producto> pro: productos.entrySet()){
+            if(pro.getValue().getDescripcion().startsWith(descr)){
+                productosNom.put(pro.getKey(), pro.getValue());
+               
             }
         }
     return productosNom;
