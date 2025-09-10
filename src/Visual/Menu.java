@@ -5,6 +5,7 @@
 package Visual;
 
 import Clases.*;
+import Internal.BuscarPorNombre;
 import java.util.TreeSet;
 
 /**
@@ -111,6 +112,12 @@ public class Menu extends javax.swing.JFrame {
 
     private void jmiConsNombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiConsNombreActionPerformed
         // TODO add your handling code here:
+         escritorio.removeAll();
+        escritorio.repaint();
+        BuscarPorNombre bpn = new BuscarPorNombre();
+        bpn.setVisible(true);
+        escritorio.add(bpn);
+        escritorio.moveToFront(bpn);
     }//GEN-LAST:event_jmiConsNombreActionPerformed
 
     private void jmiConsPrecioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiConsPrecioActionPerformed

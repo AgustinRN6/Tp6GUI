@@ -5,6 +5,7 @@
 package Internal;
 
 import Clases.Producto;
+import Visual.Menu;
 import java.util.Map;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -51,6 +52,8 @@ public class BuscarPorNombre extends javax.swing.JInternalFrame {
         lbTitulo.setFont(new java.awt.Font("Arial", 1, 24)); // NOI18N
         lbTitulo.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         lbTitulo.setText("Listado por NOMBRE");
+        lbTitulo.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
+        lbTitulo.setIconTextGap(50);
 
         lbIngreseDescripcion.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         lbIngreseDescripcion.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -101,7 +104,7 @@ public class BuscarPorNombre extends javax.swing.JInternalFrame {
                         .addComponent(txtDescripcion, javax.swing.GroupLayout.PREFERRED_SIZE, 271, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(jpPanelPrincipalLayout.createSequentialGroup()
-                        .addComponent(lbTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, 369, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(lbTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, 266, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(btSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
@@ -182,15 +185,19 @@ private void armarTabla(){
   modelo.addColumn("Descripcion");
   modelo.addColumn("Precio");
   modelo.addColumn("Categoria");
-  modelo.addColumn("Descripcion");
+  modelo.addColumn("Stock");
   jtTablaProductos.setModel(modelo);
 }
-private void cargarTabla(){
+private void cargarTabla(String c){
     borrarTabla();
-    /*for(Map.Entry<Long, Producto>produ: falta el directivo static ){
-        modelo.addRow(new Object[]{                               });
+    for(Map.Entry<Long, Producto>produ: Menu.superPC.filtrarPorNombre(c).entrySet()){
+        String descr= produ.getValue().getDescripcion();
+        String cate= produ.getValue().getRubro();
+        Integer stock = produ.getValue().getStock();
+        Double precio = produ.getValue().getPrecio();
+        modelo.addRow(new Object[]{produ.getKey(),descr, cate, stock, precio});
     }
-  */  
+    
 }
 private void borrarTabla(){
     int ind = modelo.getRowCount() -1 ;
