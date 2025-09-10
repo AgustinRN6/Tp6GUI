@@ -4,6 +4,8 @@
  */
 package Clases;
 
+import java.util.Map;
+
 /**
  *
  * @author Agustin
@@ -25,10 +27,21 @@ public class MainTest {
     long cod4 = 392023;
     DeTodoSA.agregarProducto(cod4, prod4);
     Producto prod5= new Producto("Electrodomestico","Lavarropa",300.000,"Marca lenovo");
-    long cod5 = 3942;
+    long cod5 = 341234;
     DeTodoSA.agregarProducto(cod5, prod5);
-    //METODOS DE FILTRAR POR CATEGORIA/PRECIO/NOMBRE
+     Producto prod6= new Producto("a","a",0.0,"a");
+    long cod6 = 341234;
+    DeTodoSA.agregarProducto(cod6, prod6);
+    //METODO QUE RETORNA TODOS LOS PRODUCTOS
+        System.out.println("TODOS LOS PRODUCTOS:");
+        for(Map.Entry<Long, Producto> productos:DeTodoSA.getProductos().entrySet()){
+            System.out.println("Codigo: "+ productos.getKey()+"Producto: "+ productos.getValue().getProducto());
+        }
+        
+     System.out.println(".........................................................");
     
+    //METODOS DE FILTRAR POR CATEGORIA/PRECIO/NOMBRE
+   
     //FILTRAR POR CATEGORIA
         System.out.println("METODO FILTRAR POR CATEGORIA");
     for(Producto p:  DeTodoSA.filtrarPorCategoria("Electrodomestico")){
@@ -37,13 +50,13 @@ public class MainTest {
         System.out.println(".........................................................");
     //FILTRAR POR NOMBRE
         System.out.println("METODO FILTRAR POR NOMBRE");
-    for(Producto p: DeTodoSA.filtrarPorNombre("Arroz")){
+    for(Producto p: DeTodoSA.filtrarPorNombre("Mar")){
         System.out.println(p.getProducto());
     }
       System.out.println(".........................................................");
     //FILTRAR POR PRECIO
         System.out.println("METODO FILTRAR POR PRECIO ENTRE 3.700 HASTA 400.000");
-    double precioA =  3.700;
+    double precioA = 3.700;
     double precioB = 400.000;
     for(Producto p: DeTodoSA.filtrarPorPrecio(precioA, precioB)){
         System.out.println(p.getProducto());

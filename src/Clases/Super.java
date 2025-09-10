@@ -11,13 +11,18 @@ public class Super {
     
 //METODO PARA AGREGAR PRODUCTO AL ARREGLO     
 public void agregarProducto(Long cod, Producto pr){
-    
-         productos.put(cod, pr);//lo agrega al arreglo
-            System.out.println("CLIENTE AGREGADO");
+       if(productos.containsKey(cod)){
+           System.out.println("Ese codigo ya esta en uso");
+       }else{
+       productos.put(cod, pr);//lo agrega al arreglo
+        System.out.println("CLIENTE AGREGADO");
+       }
+          
 }
 //METODO QUE REMUEVE UN PRODUCTO POR EL CODIGO
 public void borrarProducto(Long cod){
     productos.remove(cod);
+    System.out.println("Producto Removido");
 }
 //METODO QUE ME RETORNA EL ARREGLO CON TODOS LOS ELEMENTOS
 public TreeMap<Long,Producto> getProductos(){
@@ -36,18 +41,17 @@ public ArrayList<Producto> filtrarPorCategoria(String cat){
     return productosCat;//retorna el arreglo.
 }
 //METODO QUE FILTRA PRODUCTOS SEGUN EL NOMBRE
-public ArrayList<Producto> filtrarPorNombre(String nom){
+public ArrayList<Producto> filtrarPorNombre(String descr){
     ArrayList<Producto>productosNom = new ArrayList();
-        
         for(Producto pro: productos.values()){
-            if(pro.getNombre().equals(nom)){
+            if(pro.getDescripcion().startsWith(descr)){
                 productosNom.add(pro);
             }
         }
     return productosNom;
 }
 
-public ArrayList<Producto> filtrarPorPrecio(Double precioA, double precioB){
+public ArrayList<Producto> filtrarPorPrecio(Double precioA, Double precioB){
     //ejemplo de precio: entre precioA(2500) y precioB(3000)
     //la lista me retornara productos que esten entre esos dos precios o sean iguales.
     ArrayList<Producto>productosPr = new ArrayList();
