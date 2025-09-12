@@ -4,8 +4,9 @@
  */
 package Visual;
 
+import Internal.AgregarProductos;
 import Clases.*;
-import Internal.BuscarPorNombre;
+import Internal.*;
 import java.util.TreeSet;
 
 /**
@@ -53,6 +54,11 @@ public class Menu extends javax.swing.JFrame {
         jmAdministracion.setText("administracion");
 
         jmiAgregar.setText("Agregar producto");
+        jmiAgregar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmiAgregarActionPerformed(evt);
+            }
+        });
         jmAdministracion.add(jmiAgregar);
 
         jmiModificar.setText("Modificar producto");
@@ -112,7 +118,7 @@ public class Menu extends javax.swing.JFrame {
 
     private void jmiConsNombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiConsNombreActionPerformed
         // TODO add your handling code here:
-         escritorio.removeAll();
+        escritorio.removeAll();
         escritorio.repaint();
         BuscarPorNombre bpn = new BuscarPorNombre();
         bpn.setVisible(true);
@@ -127,6 +133,16 @@ public class Menu extends javax.swing.JFrame {
     private void jmiConsRubroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiConsRubroActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jmiConsRubroActionPerformed
+
+    private void jmiAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiAgregarActionPerformed
+        // TODO add your handling code here:
+        escritorio.removeAll();
+        escritorio.repaint();
+        AgregarProductos ap = new AgregarProductos();
+        ap.setVisible(true);
+        escritorio.add(ap);
+        escritorio.moveToFront(ap);
+    }//GEN-LAST:event_jmiAgregarActionPerformed
 
     /**
      * @param args the command line arguments
