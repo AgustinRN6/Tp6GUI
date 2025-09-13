@@ -2,6 +2,7 @@
 package Clases;
 
 import java.util.Comparator;
+import java.util.Objects;
 
 
 public class Producto {
@@ -70,6 +71,41 @@ public class Producto {
             }
         }        
     };
+
+    @Override
+    public int hashCode() {
+        int hash = 3;
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Producto other = (Producto) obj;
+        if (!Objects.equals(this.rubro, other.rubro)) {
+            return false;
+        }
+        if (!Objects.equals(this.nombre, other.nombre)) {
+            return false;
+        }
+        if (!Objects.equals(this.descripcion, other.descripcion)) {
+            return false;
+        }
+        if (!Objects.equals(this.precio, other.precio)) {
+            return false;
+        }
+        return Objects.equals(this.stock, other.stock);
+    }
+    
+    
    
     
 }

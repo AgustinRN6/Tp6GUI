@@ -5,6 +5,7 @@
 package Ejercicio_1;
 
 import Clases.*;
+import java.util.Iterator;
 import java.util.TreeSet;
 import javax.swing.JOptionPane;
 
@@ -173,23 +174,28 @@ public class Gestion_Productos extends javax.swing.JFrame {
             String nombre = jtfNombre.getText();
             Double precio = Double.valueOf(jtfPrecio.getText());
             String categoria = (String)jcbCategoria.getSelectedItem();
-            //Se agrega el objeto con la seleccion de la categoria, y los datos ingresados por el usuario
-            Producto p = new Producto(categoria,nombre,precio,null,1);
-            productos.add(p);
-            JOptionPane.showMessageDialog(null, "Se agregó con éxito el producto");
+            
+            //Se crea producto con informacion ingresada desde los JTextField
+            Producto p = new Producto(categoria, nombre, precio, null, 1);
+            
+            //Se evalua si están completo todos los casilleros
+            if (nombre.isEmpty()) {
+                JOptionPane.showMessageDialog(null, "Debes completar el casillero del nombre del producto");
+            } else if (productoIgual(p)) {
+                //Se evalua si el producto ya ha sido creado o no.
+                JOptionPane.showMessageDialog(null, "Este producto ya ha sido creado, intentelo nuevamente");
+            } else {
+                //Se agrega el objeto con la seleccion de la categoria, y los datos ingresados por el usuario        
+                productos.add(p);
+                JOptionPane.showMessageDialog(null, "Se agregó con éxito el producto");
+            }           
             
         } catch(NumberFormatException e) { //Si en precio el usuario NO coloca un valor numerico
             
             JOptionPane.showMessageDialog(null, "En la casilla Precio, debe colocar solo un valor numerico.");
             
-        } catch(NullPointerException e) { //Si se deja un casillero vacío
-            
-            JOptionPane.showMessageDialog(null, "No puede quedar casillas vacías");
-            
         }
-            
-        
-        
+     
     }//GEN-LAST:event_jbAgregarActionPerformed
 
     private void jtfNombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtfNombreActionPerformed
@@ -235,15 +241,33 @@ public class Gestion_Productos extends javax.swing.JFrame {
     private javax.swing.JTextField jtfNombre;
     private javax.swing.JTextField jtfPrecio;
     // End of variables declaration//GEN-END:variables
-
+    //Carga listado de categorias en el JComboBox de Categoria
     private void cargarCategoria() {
         
         for(String cat: categorias.getCategorias()) {
             
             jcbCategoria.addItem(cat);
             
+        }        
+    } 
+    
+    //Compara si el producto ingresado por parametro es igual al conjunto de productos dentro del TreeSet.
+    private boolean productoIgual(Producto pAComparar) {
+        
+        boolean esIgual = false;
+        Iterator<Producto> iterar = productos.iterator();
+        while(iterar.hasNext()) {
+            
+            Producto p = iterar.next();
+            if (p.equals(pAComparar)) {
+                esIgual = true;
+            }
+            
         }
         
-    } 
+        return esIgual;
+        
+    }
+    
     
 }
