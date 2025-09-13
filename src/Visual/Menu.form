@@ -11,21 +11,11 @@
           <SubComponents>
             <MenuItem class="javax.swing.JMenuItem" name="jmiAgregar">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Agregar producto"/>
+                <Property name="text" type="java.lang.String" value="Administracion"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jmiAgregarActionPerformed"/>
               </Events>
-            </MenuItem>
-            <MenuItem class="javax.swing.JMenuItem" name="jmiModificar">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="Modificar producto"/>
-              </Properties>
-            </MenuItem>
-            <MenuItem class="javax.swing.JMenuItem" name="jmiBorrar">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="Borrar producto"/>
-              </Properties>
             </MenuItem>
           </SubComponents>
         </Menu>

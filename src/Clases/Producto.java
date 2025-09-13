@@ -81,6 +81,14 @@ public class Producto {
             }
         }        
     };
+    
+    //Se agrega comparador de codigo para listarlo en orden desde el TreeSet
+    public static Comparator<Producto> compararPorCodigo = new Comparator<>() {
+        @Override
+        public int compare(Producto o1, Producto o2) {
+            return o1.codigo.compareTo(o2.codigo);
+        }
+    };
 
     @Override
     public int hashCode() {

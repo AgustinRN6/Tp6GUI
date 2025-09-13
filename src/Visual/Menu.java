@@ -40,8 +40,6 @@ public class Menu extends javax.swing.JFrame {
         jmbMenuOpciones = new javax.swing.JMenuBar();
         jmAdministracion = new javax.swing.JMenu();
         jmiAgregar = new javax.swing.JMenuItem();
-        jmiModificar = new javax.swing.JMenuItem();
-        jmiBorrar = new javax.swing.JMenuItem();
         jmConsultas = new javax.swing.JMenu();
         jmiConsNombre = new javax.swing.JMenuItem();
         jmiConsPrecio = new javax.swing.JMenuItem();
@@ -53,19 +51,13 @@ public class Menu extends javax.swing.JFrame {
 
         jmAdministracion.setText("administracion");
 
-        jmiAgregar.setText("Agregar producto");
+        jmiAgregar.setText("Administracion");
         jmiAgregar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jmiAgregarActionPerformed(evt);
             }
         });
         jmAdministracion.add(jmiAgregar);
-
-        jmiModificar.setText("Modificar producto");
-        jmAdministracion.add(jmiModificar);
-
-        jmiBorrar.setText("Borrar producto");
-        jmAdministracion.add(jmiBorrar);
 
         jmbMenuOpciones.add(jmAdministracion);
 
@@ -183,18 +175,17 @@ public class Menu extends javax.swing.JFrame {
     }
 
     public static Super superPC = new Super();
-    public static TreeSet<Producto> productos = new TreeSet<>();    
+    public static TreeSet<Producto> productos = new TreeSet<>(Producto.compararPorCodigo);    
+    public static CategoriasData categorias = new CategoriasData();
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenu jmAdministracion;
     private javax.swing.JMenu jmConsultas;
     private javax.swing.JMenu jmSalir;
     private javax.swing.JMenuBar jmbMenuOpciones;
     private javax.swing.JMenuItem jmiAgregar;
-    private javax.swing.JMenuItem jmiBorrar;
     private javax.swing.JMenuItem jmiConsNombre;
     private javax.swing.JMenuItem jmiConsPrecio;
     private javax.swing.JMenuItem jmiConsRubro;
-    private javax.swing.JMenuItem jmiModificar;
     private javax.swing.JMenuItem jmiSalir;
     // End of variables declaration//GEN-END:variables
 }
