@@ -8,13 +8,20 @@ import Clases.*;
 import java.util.Iterator;
 import java.util.TreeSet;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
  * @author necoi
  */
 public class Gestion_Productos extends javax.swing.JFrame {
-    
+    //Se crea el modelo de la tabla, y se reemplaza el valor de celda editable a falso
+    private DefaultTableModel modeloTabla = new DefaultTableModel() {
+    @Override
+    public boolean isCellEditable(int fila,int columna) {        
+        return false;
+    }
+    };
     
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(Gestion_Productos.class.getName());
@@ -26,6 +33,7 @@ public class Gestion_Productos extends javax.swing.JFrame {
         initComponents();
         this.setTitle("Gestion de Productos");
         cargarCategoria();
+        columnaProductos();
     }
     
 
@@ -186,7 +194,8 @@ public class Gestion_Productos extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null, "Este producto ya ha sido creado, intentelo nuevamente");
             } else {
                 //Se agrega el objeto con la seleccion de la categoria, y los datos ingresados por el usuario        
-                productos.add(p);
+                productos.add(p); //Se carga producto en el TreeSet
+                cargarProductos(p); //Se carga producto en la tabla
                 JOptionPane.showMessageDialog(null, "Se agregó con éxito el producto");
             }           
             
@@ -252,21 +261,29 @@ public class Gestion_Productos extends javax.swing.JFrame {
     } 
     
     //Compara si el producto ingresado por parametro es igual al conjunto de productos dentro del TreeSet.
-    private boolean productoIgual(Producto pAComparar) {
-        
+    private boolean productoIgual(Producto pAComparar) {       
         boolean esIgual = false;
         Iterator<Producto> iterar = productos.iterator();
-        while(iterar.hasNext()) {
-            
+        while(iterar.hasNext()) {            
             Producto p = iterar.next();
             if (p.equals(pAComparar)) {
                 esIgual = true;
-            }
-            
-        }
-        
-        return esIgual;
-        
+            }            
+        }        
+        return esIgual;        
+    }
+    
+    //Se agregan el producto creado a la tabla
+    private void cargarProductos(Producto p) {
+            modeloTabla.addRow(new Object[] {p.getNombre(),p.getRubro(),p.getPrecio()});
+    }
+    
+    //Se agrega las columnas con sus nombres correspondientes a la tabla
+    private void columnaProductos() {
+        modeloTabla.addColumn("Nombre");
+        modeloTabla.addColumn("Categoria");
+        modeloTabla.addColumn("Precio");
+        jtTabla.setModel(modeloTabla);
     }
     
     
