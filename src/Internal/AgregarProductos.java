@@ -4,6 +4,7 @@ package Internal;
 import javax.swing.table.DefaultTableModel;
 import Visual.Menu;
 import Clases.*;
+import java.beans.PropertyVetoException;
 import java.util.Iterator;
 import java.util.TreeSet;
 import javax.swing.JOptionPane;
@@ -21,10 +22,7 @@ public class AgregarProductos extends javax.swing.JInternalFrame {
      */
     public AgregarProductos() {
         initComponents();
-        this.setTitle("De todo S.A. Productos");
-        cargarCategoria();
-        columnaProductos();
-        cargarProductos();
+        crearVentana();
     }
 
     /**
@@ -332,8 +330,23 @@ public class AgregarProductos extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jbEliminarActionPerformed
 
     private void jbCerrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbCerrarActionPerformed
-        System.out.println(evt.getActionCommand());
-        this.setVisible(false); 
+        //Se cierra la ventana si el buffer está vacío, si no saldrá una advertencia
+        if (buffer.isEmpty()) {
+            System.out.println(evt.getActionCommand());
+            setVisible(false); //Se cierra la ventana
+        } else {
+            //Se advierte que puede eliminarse la información del buffer, debido a que es local de esta ventana
+            //Si el usuario coloca la opción SI, el valor da 0, se cierra la ventana.
+            int si_no = JOptionPane.showConfirmDialog(null, 
+                        "Si no actualiza, lo último registrado se perderá, ¿Desea continuar?",
+                        "ADVERTENCIA", JOptionPane.YES_NO_OPTION, JOptionPane.INFORMATION_MESSAGE);
+            if (si_no == 0) {
+                System.out.println(evt.getActionCommand());
+                setVisible(false); //Se cierra la ventana
+            }
+        }
+
+                
     }//GEN-LAST:event_jbCerrarActionPerformed
 
     private void jbNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbNuevoActionPerformed
@@ -351,6 +364,8 @@ public class AgregarProductos extends javax.swing.JInternalFrame {
 
     //Se crea para guardar elementos en un estado intermedio (previo a la carga a la base de datos)
     private TreeSet<Producto> buffer = new TreeSet<>(Producto.compararPorCodigo);
+    //Se instancia la clase categoría, que ya fija los distintos tipos de categoria
+    private CategoriasData categorias = new CategoriasData();
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jbActualizar;
     private javax.swing.JButton jbBuscar;
@@ -380,7 +395,7 @@ public class AgregarProductos extends javax.swing.JInternalFrame {
     //agrega las categorias en el jbcCategoria y jbcRubro
     private void cargarCategoria() {
 
-        for (String cat : Menu.categorias.getCategorias()) {
+        for (String cat : categorias.getCategorias()) {
 
             jcbCategoria.addItem(cat);
             jcbRubro.addItem(cat);
@@ -444,6 +459,21 @@ public class AgregarProductos extends javax.swing.JInternalFrame {
         }
         //Si no se encuentra un código identico, retorna falso
         return esIgual;
+    }
+    
+    //Evento cuando se crea la ventana
+    private void crearVentana() {        
+        //Se limpia los JComboBox
+        jcbCategoria.removeAllItems();
+        jcbRubro.removeAllItems();
+        //Se coloca titulo encabezado
+        this.setTitle("De todo S.A. Productos");
+        //Se carga las categorias de los JComboBox
+        cargarCategoria();
+        //Se cargan las columnas de las tablas
+        columnaProductos();
+        //Se cargan los productos en la tabla
+        cargarProductos();        
     }
     
 }

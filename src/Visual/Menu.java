@@ -176,7 +176,6 @@ public class Menu extends javax.swing.JFrame {
 
     public static Super superPC = new Super();
     public static TreeSet<Producto> productos = new TreeSet<>(Producto.compararPorCodigo);    
-    public static CategoriasData categorias = new CategoriasData();
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenu jmAdministracion;
     private javax.swing.JMenu jmConsultas;
