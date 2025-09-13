@@ -14,22 +14,22 @@ public class MainTest {
     public static void main(String[] args){
      Super DeTodoSA = new Super();
     //CREAMOS LOS PRODUCTOS Y CODIGOS PARA AGREGARLOS AL TREEMAP DE LA CLASE SUPER
-    Producto prod1= new Producto("Electrodomestico","Monitor",240.000,"Resolucion: 1980x 2400, 240hz",12);
+    Producto prod1= new Producto("Electrodomestico","Monitor",240.000,"Resolucion: 1980x 2400, 240hz",12,1);
     long cod1 = 13354;
     DeTodoSA.agregarProducto(cod1, prod1);
-    Producto prod2= new Producto("Comida","Arroz",1.300,"Paquete de 1kg",12);
+    Producto prod2= new Producto("Comida","Arroz",1.300,"Paquete de 1kg",12,2);
     long cod2= 1442;
     DeTodoSA.agregarProducto(cod2, prod2);
-    Producto prod3 = new Producto("Bebida","Coca-Cola",3.700,"Bebida de 2,5Lt",12);
+    Producto prod3 = new Producto("Bebida","Coca-Cola",3.700,"Bebida de 2,5Lt",12,3);
     long cod3= 3942;
     DeTodoSA.agregarProducto(cod3, prod3);
-    Producto prod4= new Producto("Ropa","Campera de invierno",80.000,"Hecha de algodon",12);
+    Producto prod4= new Producto("Ropa","Campera de invierno",80.000,"Hecha de algodon",12,4);
     long cod4 = 392023;
     DeTodoSA.agregarProducto(cod4, prod4);
-    Producto prod5= new Producto("Electrodomestico","Lavarropa",300.000,"Marca lenovo",12);
+    Producto prod5= new Producto("Electrodomestico","Lavarropa",300.000,"Marca lenovo",12,5);
     long cod5 = 341234;
     DeTodoSA.agregarProducto(cod5, prod5);
-     Producto prod6= new Producto("a","a",0.0,"a",12);
+     Producto prod6= new Producto("a","a",0.0,"a",12,6);
     long cod6 = 341234;
     DeTodoSA.agregarProducto(cod6, prod6);
     //METODO QUE RETORNA TODOS LOS PRODUCTOS

@@ -20,6 +20,7 @@ public class AgregarProductos extends javax.swing.JInternalFrame {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
+        java.awt.GridBagConstraints gridBagConstraints;
 
         jlTitulo = new javax.swing.JLabel();
         jpPanel = new javax.swing.JPanel();
@@ -27,6 +28,12 @@ public class AgregarProductos extends javax.swing.JInternalFrame {
         jcbCategoria = new javax.swing.JComboBox<>();
         jspTabla = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
+        jpPanelProductos = new javax.swing.JPanel();
+        jlCodigo = new javax.swing.JLabel();
+        jlDescripcion = new javax.swing.JLabel();
+        jlPrecio = new javax.swing.JLabel();
+        jlRubro = new javax.swing.JLabel();
+        jlStock = new javax.swing.JLabel();
 
         jlTitulo.setFont(new java.awt.Font("Arial Black", 1, 24)); // NOI18N
         jlTitulo.setForeground(new java.awt.Color(0, 0, 0));
@@ -72,20 +79,80 @@ public class AgregarProductos extends javax.swing.JInternalFrame {
         ));
         jspTabla.setViewportView(jTable1);
 
+        jpPanelProductos.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        java.awt.GridBagLayout jpPanelProductosLayout = new java.awt.GridBagLayout();
+        new java.awt.GridBagLayout().columnWidths = new int[] {0, 0, 0, 0, 0};
+        new java.awt.GridBagLayout().rowHeights = new int[] {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+        jpPanelProductos.setLayout(jpPanelProductosLayout);
+
+        jlCodigo.setFont(new java.awt.Font("Arial Black", 1, 12)); // NOI18N
+        jlCodigo.setText("Codigo:");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.gridwidth = 5;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(9, 9, 0, 0);
+        jpPanelProductos.add(jlCodigo, gridBagConstraints);
+
+        jlDescripcion.setFont(new java.awt.Font("Arial Black", 1, 12)); // NOI18N
+        jlDescripcion.setText("Descripcion:");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 2;
+        gridBagConstraints.gridwidth = 3;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(6, 9, 0, 390);
+        jpPanelProductos.add(jlDescripcion, gridBagConstraints);
+
+        jlPrecio.setFont(new java.awt.Font("Arial Black", 1, 12)); // NOI18N
+        jlPrecio.setText("Precio:");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 4;
+        gridBagConstraints.gridwidth = 3;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(6, 9, 0, 0);
+        jpPanelProductos.add(jlPrecio, gridBagConstraints);
+
+        jlRubro.setFont(new java.awt.Font("Arial Black", 1, 12)); // NOI18N
+        jlRubro.setText("Rubro:");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 6;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(6, 9, 0, 0);
+        jpPanelProductos.add(jlRubro, gridBagConstraints);
+
+        jlStock.setFont(new java.awt.Font("Arial Black", 1, 12)); // NOI18N
+        jlStock.setText("Stock:");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 8;
+        gridBagConstraints.gridheight = 11;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(2, 9, 138, 0);
+        jpPanelProductos.add(jlStock, gridBagConstraints);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+            .addGroup(layout.createSequentialGroup()
                 .addGap(50, 50, 50)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jpPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jspTabla, javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                        .addGap(50, 50, 50)
-                        .addComponent(jlTitulo)
-                        .addGap(0, 116, Short.MAX_VALUE)))
-                .addGap(50, 50, 50))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jpPanelProductos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jpPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jspTabla, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                .addGap(50, 50, 50)
+                                .addComponent(jlTitulo)
+                                .addGap(0, 116, Short.MAX_VALUE)))
+                        .addGap(50, 50, 50))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -95,6 +162,8 @@ public class AgregarProductos extends javax.swing.JInternalFrame {
                 .addComponent(jpPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jspTabla, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jpPanelProductos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
@@ -106,8 +175,14 @@ public class AgregarProductos extends javax.swing.JInternalFrame {
     private javax.swing.JTable jTable1;
     private javax.swing.JComboBox<String> jcbCategoria;
     private javax.swing.JLabel jlCategoria;
+    private javax.swing.JLabel jlCodigo;
+    private javax.swing.JLabel jlDescripcion;
+    private javax.swing.JLabel jlPrecio;
+    private javax.swing.JLabel jlRubro;
+    private javax.swing.JLabel jlStock;
     private javax.swing.JLabel jlTitulo;
     private javax.swing.JPanel jpPanel;
+    private javax.swing.JPanel jpPanelProductos;
     private javax.swing.JScrollPane jspTabla;
     // End of variables declaration//GEN-END:variables
 
