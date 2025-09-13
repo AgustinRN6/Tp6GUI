@@ -5,6 +5,7 @@ import javax.swing.table.DefaultTableModel;
 import Visual.Menu;
 import Clases.*;
 import java.util.Iterator;
+import java.util.TreeSet;
 import javax.swing.JOptionPane;
 
 public class AgregarProductos extends javax.swing.JInternalFrame {
@@ -34,7 +35,6 @@ public class AgregarProductos extends javax.swing.JInternalFrame {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
-        java.awt.GridBagConstraints gridBagConstraints;
 
         jlTitulo = new javax.swing.JLabel();
         jpPanel = new javax.swing.JPanel();
@@ -172,6 +172,11 @@ public class AgregarProductos extends javax.swing.JInternalFrame {
         );
 
         jbBuscar.setText("buscar");
+        jbBuscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbBuscarActionPerformed(evt);
+            }
+        });
 
         jbCerrar.setFont(new java.awt.Font("Arial Black", 1, 10)); // NOI18N
         jbCerrar.setText("cerrar");
@@ -182,6 +187,11 @@ public class AgregarProductos extends javax.swing.JInternalFrame {
         });
 
         jbNuevo.setText("Nuevo");
+        jbNuevo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbNuevoActionPerformed(evt);
+            }
+        });
 
         jbGuardar.setText("Guardar");
         jbGuardar.addActionListener(new java.awt.event.ActionListener() {
@@ -251,11 +261,10 @@ public class AgregarProductos extends javax.swing.JInternalFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jbBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 120, Short.MAX_VALUE)
                         .addComponent(jbCerrar)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
                     .addComponent(jpPanelProductos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jbNuevo, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jbGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -291,9 +300,9 @@ public class AgregarProductos extends javax.swing.JInternalFrame {
                 JOptionPane.showMessageDialog(null, "Tiene que ser minimo de 1 el stock");
             } else {
                 //Se agrega el objeto con la seleccion de la categoria, y los datos ingresados por el usuario        
-                Menu.productos.add(p); //Se carga producto en el TreeSet
-                cargarProductos();
-                JOptionPane.showMessageDialog(null, "Se agregó con éxito el producto");
+                //Se carga producto en el TreeSet intermedio, necesita actualizarse para guardarse en la base de datos
+                buffer.add(p);
+                JOptionPane.showMessageDialog(null, "Se agregó con éxito el producto, actualice por favor");
             }
 
         } catch (NumberFormatException e) { //Si en precio el usuario NO coloca un valor numerico
@@ -306,7 +315,16 @@ public class AgregarProductos extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jbGuardarActionPerformed
 
     private void jbActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbActualizarActionPerformed
-        // TODO add your handling code here:
+        //Se realiza la carga de datos del estado intermedio a la base de datos de Productos.  
+        boolean productosRepetidos = false;
+        for(Producto bufferP: buffer) {
+            Menu.productos.add(bufferP);
+        }
+        JOptionPane.showMessageDialog(null, "Se realizó con éxito la actualización");
+        //Se actualiza la tabla
+        cargarProductos();
+        //Se limpia el buffer
+        buffer.clear();
     }//GEN-LAST:event_jbActualizarActionPerformed
 
     private void jbEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbEliminarActionPerformed
@@ -318,7 +336,21 @@ public class AgregarProductos extends javax.swing.JInternalFrame {
         this.setVisible(false); 
     }//GEN-LAST:event_jbCerrarActionPerformed
 
+    private void jbNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbNuevoActionPerformed
+        //Limpia los JTextField para colocar un nuevo producto
+        jtfCodigo.setText("");
+        jtfDescripcion.setText("");
+        jtfPrecio.setText("");
+        jsStock.setValue(0);
+    }//GEN-LAST:event_jbNuevoActionPerformed
 
+    private void jbBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbBuscarActionPerformed
+        //Llama al método cargarProductos para buscar por la categoria seleccionada
+        cargarProductos();
+    }//GEN-LAST:event_jbBuscarActionPerformed
+
+    //Se crea para guardar elementos en un estado intermedio (previo a la carga a la base de datos)
+    private TreeSet<Producto> buffer = new TreeSet<>(Producto.compararPorCodigo);
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jbActualizar;
     private javax.swing.JButton jbBuscar;
@@ -353,6 +385,7 @@ public class AgregarProductos extends javax.swing.JInternalFrame {
             jcbCategoria.addItem(cat);
             jcbRubro.addItem(cat);
         }
+        jcbCategoria.addItem("Todos"); //se agrega la opción para mostrar la tabla completa
     }
     
     //Se agrega las columnas con sus nombres correspondientes a la tabla
@@ -365,13 +398,19 @@ public class AgregarProductos extends javax.swing.JInternalFrame {
         jtTabla.setModel(modeloTabla);
     }
     
-    //Se agregan todos los productos cargados en el TreeSet
+    
+    
+    //Se agregan todos los productos cargados en el TreeSet (se filtra según rubro/categoria
     private void cargarProductos() {
+        String categoriaSelec = (String)jcbCategoria.getSelectedItem(); //Toma el rubro que se filtrará en la tabla
         limpiarTabla();
         Iterator<Producto> iterar = Menu.productos.iterator();
         while (iterar.hasNext()) {            
             Producto p = iterar.next();
-            modeloTabla.addRow(new Object[]{p.getCodigo(), p.getDescripcion(), p.getPrecio(),p.getRubro(),p.getStock()});            
+            if (p.getRubro().equalsIgnoreCase(categoriaSelec) || categoriaSelec.equalsIgnoreCase("Todos")) {
+                modeloTabla.addRow(new Object[]{p.getCodigo(), p.getDescripcion(), p.getPrecio(),p.getRubro(),p.getStock()});  
+            }
+                      
         }        
     }
     
@@ -384,15 +423,26 @@ public class AgregarProductos extends javax.swing.JInternalFrame {
         }   
     }
     
+    //Compara si el producto en la TreeSet general o intermedio tiene el mismo código que el ingresado
     private boolean productoIgual(Producto pAComparar) {
         boolean esIgual = false;
         Iterator<Producto> iterar = Menu.productos.iterator();
+        //Para el general
         while (iterar.hasNext()) {
             Producto p = iterar.next();
-            if (p.getCodigo().equals(pAComparar)) {
+            if (p.getCodigo().equals(pAComparar.getCodigo())) {
                 esIgual = true;
             }
         }
+        //Para el intermedio
+        Iterator<Producto> iterarB = buffer.iterator();
+        while (iterarB.hasNext()) {
+            Producto p = iterarB.next();
+            if (p.getCodigo().equals(pAComparar.getCodigo())) {
+                esIgual = true;
+            }
+        }
+        //Si no se encuentra un código identico, retorna falso
         return esIgual;
     }
     
