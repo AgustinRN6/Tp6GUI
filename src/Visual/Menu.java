@@ -18,8 +18,6 @@ public class Menu extends javax.swing.JFrame {
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(Menu.class.getName());
     public Personalizados.Escritorio escritorio; //Se crea objeto tipo escritorio
     
-    
-    
     /**
      * Creates new form Menu
      */
@@ -27,6 +25,7 @@ public class Menu extends javax.swing.JFrame {
         initComponents();
         escritorio = new Personalizados.Escritorio(); //Se inicializa escritorio
         this.setContentPane(escritorio); //Coloca el escritorio en el JFrame
+        this.setTitle("De todo S.A."); //Coloca el titulo encabezado del JFrame
     }
 
     /**

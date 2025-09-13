@@ -1,15 +1,32 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
+ */
+package Ejercicio_1;
 
-package Internal;
+import Clases.*;
+import java.util.TreeSet;
+import javax.swing.JOptionPane;
 
-
-public class AgregarProductos extends javax.swing.JInternalFrame {
+/**
+ *
+ * @author necoi
+ */
+public class Gestion_Productos extends javax.swing.JFrame {
+    
+    
+    
+    private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(Gestion_Productos.class.getName());
 
     /**
-     * Creates new form AgregarProductos
+     * Creates new form Gestion_Productos
      */
-    public AgregarProductos() {
+    public Gestion_Productos() {
         initComponents();
+        this.setTitle("Gestion de Productos");
+        cargarCategoria();
     }
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -30,7 +47,9 @@ public class AgregarProductos extends javax.swing.JInternalFrame {
         jtfNombre = new javax.swing.JTextField();
         jtfPrecio = new javax.swing.JTextField();
         jspTabla = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        jtTabla = new javax.swing.JTable();
+
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jlTitulo.setFont(new java.awt.Font("Arial Black", 1, 24)); // NOI18N
         jlTitulo.setForeground(new java.awt.Color(0, 0, 0));
@@ -79,7 +98,7 @@ public class AgregarProductos extends javax.swing.JInternalFrame {
                     .addComponent(jcbCategoria, 0, 180, Short.MAX_VALUE)
                     .addComponent(jtfNombre)
                     .addComponent(jtfPrecio))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 43, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jbAgregar, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -102,56 +121,108 @@ public class AgregarProductos extends javax.swing.JInternalFrame {
                 .addGap(21, 21, 21))
         );
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        jtTabla.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null}
+
             },
             new String [] {
                 "Title 1", "Title 2", "Title 3"
             }
-        ));
-        jspTabla.setViewportView(jTable1);
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jspTabla.setViewportView(jtTabla);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(50, 50, 50)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap(60, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jpPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jlTitulo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jspTabla, javax.swing.GroupLayout.Alignment.LEADING))
-                .addGap(50, 50, 50))
+                .addGap(60, 60, 60))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(20, Short.MAX_VALUE)
                 .addComponent(jlTitulo)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jpPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jspTabla, javax.swing.GroupLayout.PREFERRED_SIZE, 268, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(50, 50, 50))
+                .addContainerGap(20, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jbAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbAgregarActionPerformed
+        
+        try {
+                
+            String nombre = jtfNombre.getText();
+            Double precio = Double.valueOf(jtfPrecio.getText());
+            String categoria = (String)jcbCategoria.getSelectedItem();
+            //Se agrega el objeto con la seleccion de la categoria, y los datos ingresados por el usuario
+            Producto p = new Producto(categoria,nombre,precio,"arbol",1);
+            productos.add(p);
+            JOptionPane.showMessageDialog(null, "Se agregó con éxito el producto");
+            
+        } catch(NumberFormatException e) { //Si en precio el usuario NO coloca un valor numerico
+            
+            JOptionPane.showMessageDialog(null, "En la casilla Precio, debe colocar solo un valor numerico.");
+            
+        } catch(NullPointerException e) { //Si se deja un casillero vacío
+            
+            JOptionPane.showMessageDialog(null, "No puede quedar casillas vacías");
+            
+        }
+            
+        
+        
+    }//GEN-LAST:event_jbAgregarActionPerformed
+
     private void jtfNombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtfNombreActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jtfNombreActionPerformed
 
-    private void jbAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbAgregarActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jbAgregarActionPerformed
+    /**
+     * @param args the command line arguments
+     */
+    public static void main(String args[]) {
+        /* Set the Nimbus look and feel */
+        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         */
+        try {
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+                if ("Nimbus".equals(info.getName())) {
+                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                    break;
+                }
+            }
+        } catch (ReflectiveOperationException | javax.swing.UnsupportedLookAndFeelException ex) {
+            logger.log(java.util.logging.Level.SEVERE, null, ex);
+        }
+        //</editor-fold>
 
-
+        /* Create and display the form */
+        java.awt.EventQueue.invokeLater(() -> new Gestion_Productos().setVisible(true));
+    }
+    public static final CategoriasData categorias = new CategoriasData();
+    public static TreeSet<Producto> productos = new TreeSet<>();
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTable jTable1;
     private javax.swing.JButton jbAgregar;
     private javax.swing.JComboBox<String> jcbCategoria;
     private javax.swing.JLabel jlCategoria;
@@ -160,10 +231,19 @@ public class AgregarProductos extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jlTitulo;
     private javax.swing.JPanel jpPanel;
     private javax.swing.JScrollPane jspTabla;
+    private javax.swing.JTable jtTabla;
     private javax.swing.JTextField jtfNombre;
     private javax.swing.JTextField jtfPrecio;
     // End of variables declaration//GEN-END:variables
 
+    private void cargarCategoria() {
+        
+        for(String cat: categorias.getCategorias()) {
+            
+            jcbCategoria.addItem(cat);
+            
+        }
+        
+    } 
     
-
 }

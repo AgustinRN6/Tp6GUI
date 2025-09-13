@@ -9,6 +9,7 @@ import javax.swing.JDesktopPane;
 public class Escritorio extends JDesktopPane{
     private BufferedImage img;
     String rutaImagen = "/images/Escritorio.jpg";
+    
 
     public Escritorio() {        
         try {
