@@ -48,6 +48,7 @@ public class Menu extends javax.swing.JFrame {
         jmiConsPrecio = new javax.swing.JMenuItem();
         jmiConsRubro = new javax.swing.JMenuItem();
         jmSalir = new javax.swing.JMenu();
+        jmiSalir = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -98,6 +99,15 @@ public class Menu extends javax.swing.JFrame {
         jmbMenuOpciones.add(jmConsultas);
 
         jmSalir.setText("Salir");
+
+        jmiSalir.setText("salir");
+        jmiSalir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmiSalirActionPerformed(evt);
+            }
+        });
+        jmSalir.add(jmiSalir);
+
         jmbMenuOpciones.add(jmSalir);
 
         setJMenuBar(jmbMenuOpciones);
@@ -135,7 +145,6 @@ public class Menu extends javax.swing.JFrame {
     }//GEN-LAST:event_jmiConsRubroActionPerformed
 
     private void jmiAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiAgregarActionPerformed
-        // TODO add your handling code here:
         escritorio.removeAll();
         escritorio.repaint();
         AgregarProductos ap = new AgregarProductos();
@@ -143,6 +152,11 @@ public class Menu extends javax.swing.JFrame {
         escritorio.add(ap);
         escritorio.moveToFront(ap);
     }//GEN-LAST:event_jmiAgregarActionPerformed
+
+    private void jmiSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiSalirActionPerformed
+        System.exit(0);
+        System.out.println(evt.getActionCommand());
+    }//GEN-LAST:event_jmiSalirActionPerformed
 
     /**
      * @param args the command line arguments
@@ -182,5 +196,6 @@ public class Menu extends javax.swing.JFrame {
     private javax.swing.JMenuItem jmiConsPrecio;
     private javax.swing.JMenuItem jmiConsRubro;
     private javax.swing.JMenuItem jmiModificar;
+    private javax.swing.JMenuItem jmiSalir;
     // End of variables declaration//GEN-END:variables
 }
