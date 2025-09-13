@@ -174,7 +174,7 @@ public class Gestion_Productos extends javax.swing.JFrame {
             Double precio = Double.valueOf(jtfPrecio.getText());
             String categoria = (String)jcbCategoria.getSelectedItem();
             //Se agrega el objeto con la seleccion de la categoria, y los datos ingresados por el usuario
-            Producto p = new Producto(categoria,nombre,precio,"arbol",1);
+            Producto p = new Producto(categoria,nombre,precio,null,1);
             productos.add(p);
             JOptionPane.showMessageDialog(null, "Se agregó con éxito el producto");
             
@@ -221,7 +221,7 @@ public class Gestion_Productos extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(() -> new Gestion_Productos().setVisible(true));
     }
     public static final CategoriasData categorias = new CategoriasData();
-    public static TreeSet<Producto> productos = new TreeSet<>();
+    public static TreeSet<Producto> productos = new TreeSet<>(Producto.compararPorRN);
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jbAgregar;
     private javax.swing.JComboBox<String> jcbCategoria;

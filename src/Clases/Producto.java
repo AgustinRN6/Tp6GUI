@@ -1,6 +1,8 @@
 
 package Clases;
 
+import java.util.Comparator;
+
 
 public class Producto {
     private String rubro;
@@ -56,6 +58,18 @@ public class Producto {
     public String getProducto(){
         return"Nombre: "+ nombre + ", Descripcion: "+ descripcion +", Precio:"+ precio+ ", Rubro: "+ rubro+ ", Stock:"+ stock;
     }
+    
+    //Se agrega comparador de nombre y rubro en Producto para utilizarlo en TreeSet.
+    public static Comparator<Producto> compararPorRN = new Comparator<>() {
+        @Override
+        public int compare(Producto o1, Producto o2) {
+            if (!(o1.nombre.equalsIgnoreCase(o2.nombre))) {
+                return o1.nombre.compareToIgnoreCase(o2.nombre);
+            } else {
+                return o1.rubro.compareToIgnoreCase(o2.rubro);
+            }
+        }        
+    };
    
     
 }
