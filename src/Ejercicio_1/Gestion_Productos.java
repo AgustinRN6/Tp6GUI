@@ -184,7 +184,7 @@ public class Gestion_Productos extends javax.swing.JFrame {
             String categoria = (String)jcbCategoria.getSelectedItem();
             
             //Se crea producto con informacion ingresada desde los JTextField
-            Producto p = new Producto(categoria, nombre, precio, null, 1);
+            Producto p = new Producto(categoria, nombre, precio, null, 1, 1);
             
             //Se evalua si están completo todos los casilleros
             if (nombre.isEmpty()) {

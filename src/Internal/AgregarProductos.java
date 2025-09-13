@@ -9,6 +9,7 @@ public class AgregarProductos extends javax.swing.JInternalFrame {
      */
     public AgregarProductos() {
         initComponents();
+        this.setTitle("De todo S.A. Productos");
     }
 
     /**
@@ -23,46 +24,19 @@ public class AgregarProductos extends javax.swing.JInternalFrame {
         jlTitulo = new javax.swing.JLabel();
         jpPanel = new javax.swing.JPanel();
         jlCategoria = new javax.swing.JLabel();
-        jlNombre = new javax.swing.JLabel();
-        jlPrecio = new javax.swing.JLabel();
-        jbAgregar = new javax.swing.JButton();
         jcbCategoria = new javax.swing.JComboBox<>();
-        jtfNombre = new javax.swing.JTextField();
-        jtfPrecio = new javax.swing.JTextField();
         jspTabla = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
 
         jlTitulo.setFont(new java.awt.Font("Arial Black", 1, 24)); // NOI18N
         jlTitulo.setForeground(new java.awt.Color(0, 0, 0));
-        jlTitulo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icono_AgregarProductos.png"))); // NOI18N
         jlTitulo.setText("GESTIÓN DE PRODUCTOS");
 
         jpPanel.setBackground(java.awt.Color.lightGray);
         jpPanel.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
         jlCategoria.setFont(new java.awt.Font("Arial Black", 1, 12)); // NOI18N
-        jlCategoria.setText("Categoria:");
-
-        jlNombre.setFont(new java.awt.Font("Arial Black", 1, 12)); // NOI18N
-        jlNombre.setText("Nombre:");
-
-        jlPrecio.setFont(new java.awt.Font("Arial Black", 1, 12)); // NOI18N
-        jlPrecio.setText("Precio ($):");
-
-        jbAgregar.setFont(new java.awt.Font("Arial Black", 1, 18)); // NOI18N
-        jbAgregar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icono_BotonAgregar.png"))); // NOI18N
-        jbAgregar.setText("Agregar");
-        jbAgregar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jbAgregarActionPerformed(evt);
-            }
-        });
-
-        jtfNombre.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jtfNombreActionPerformed(evt);
-            }
-        });
+        jlCategoria.setText("Filtrar por categoria:");
 
         javax.swing.GroupLayout jpPanelLayout = new javax.swing.GroupLayout(jpPanel);
         jpPanel.setLayout(jpPanelLayout);
@@ -70,47 +44,30 @@ public class AgregarProductos extends javax.swing.JInternalFrame {
             jpPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jpPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jpPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jlCategoria)
-                    .addComponent(jlPrecio)
-                    .addComponent(jlNombre, javax.swing.GroupLayout.Alignment.TRAILING))
+                .addComponent(jlCategoria)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jpPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jcbCategoria, 0, 180, Short.MAX_VALUE)
-                    .addComponent(jtfNombre)
-                    .addComponent(jtfPrecio))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 43, Short.MAX_VALUE)
-                .addComponent(jbAgregar, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addComponent(jcbCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(182, Short.MAX_VALUE))
         );
         jpPanelLayout.setVerticalGroup(
             jpPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jpPanelLayout.createSequentialGroup()
-                .addGap(21, 21, 21)
+                .addContainerGap(20, Short.MAX_VALUE)
                 .addGroup(jpPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jlCategoria)
                     .addComponent(jcbCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jpPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jlNombre, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jtfNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jbAgregar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jpPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jlPrecio)
-                    .addComponent(jtfPrecio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(21, 21, 21))
+                .addContainerGap(20, Short.MAX_VALUE))
         );
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null}
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3"
+                "Title 1", "Title 2", "Title 3", "Title 4", "Title 5"
             }
         ));
         jspTabla.setViewportView(jTable1);
@@ -123,8 +80,11 @@ public class AgregarProductos extends javax.swing.JInternalFrame {
                 .addGap(50, 50, 50)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jpPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jlTitulo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jspTabla, javax.swing.GroupLayout.Alignment.LEADING))
+                    .addComponent(jspTabla, javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                        .addGap(50, 50, 50)
+                        .addComponent(jlTitulo)
+                        .addGap(0, 116, Short.MAX_VALUE)))
                 .addGap(50, 50, 50))
         );
         layout.setVerticalGroup(
@@ -134,34 +94,21 @@ public class AgregarProductos extends javax.swing.JInternalFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jpPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jspTabla, javax.swing.GroupLayout.PREFERRED_SIZE, 268, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(50, 50, 50))
+                .addComponent(jspTabla, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jtfNombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtfNombreActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jtfNombreActionPerformed
-
-    private void jbAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbAgregarActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jbAgregarActionPerformed
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTable jTable1;
-    private javax.swing.JButton jbAgregar;
     private javax.swing.JComboBox<String> jcbCategoria;
     private javax.swing.JLabel jlCategoria;
-    private javax.swing.JLabel jlNombre;
-    private javax.swing.JLabel jlPrecio;
     private javax.swing.JLabel jlTitulo;
     private javax.swing.JPanel jpPanel;
     private javax.swing.JScrollPane jspTabla;
-    private javax.swing.JTextField jtfNombre;
-    private javax.swing.JTextField jtfPrecio;
     // End of variables declaration//GEN-END:variables
 
     
