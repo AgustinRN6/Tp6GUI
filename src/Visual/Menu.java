@@ -48,6 +48,7 @@ public class Menu extends javax.swing.JFrame {
         jmiSalir = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setPreferredSize(new java.awt.Dimension(800, 700));
 
         jmAdministracion.setText("administracion");
 
@@ -107,11 +108,11 @@ public class Menu extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 650, Short.MAX_VALUE)
+            .addGap(0, 774, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 455, Short.MAX_VALUE)
+            .addGap(0, 557, Short.MAX_VALUE)
         );
 
         pack();
@@ -121,7 +122,7 @@ public class Menu extends javax.swing.JFrame {
         // TODO add your handling code here:
         escritorio.removeAll();
         escritorio.repaint();
-        BuscarPorNombre bpn = new BuscarPorNombre();
+        BuscarPorDescripcion bpn = new BuscarPorDescripcion();
         bpn.setVisible(true);
         escritorio.add(bpn);
         escritorio.moveToFront(bpn);
@@ -129,10 +130,22 @@ public class Menu extends javax.swing.JFrame {
 
     private void jmiConsPrecioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiConsPrecioActionPerformed
         // TODO add your handling code here:
+           escritorio.removeAll();
+        escritorio.repaint();
+        BuscarPorPrecio bpp = new BuscarPorPrecio();
+        bpp.setVisible(true);
+        escritorio.add(bpp);
+        escritorio.moveToFront(bpp);
     }//GEN-LAST:event_jmiConsPrecioActionPerformed
 
     private void jmiConsRubroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiConsRubroActionPerformed
         // TODO add your handling code here:
+         escritorio.removeAll();
+        escritorio.repaint();
+        BuscarPorCategoria bpc = new BuscarPorCategoria();
+        bpc.setVisible(true);
+        escritorio.add(bpc);
+        escritorio.moveToFront(bpc);
     }//GEN-LAST:event_jmiConsRubroActionPerformed
 
     private void jmiAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiAgregarActionPerformed

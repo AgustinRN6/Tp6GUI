@@ -14,20 +14,18 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author Agustin
  */
-public class BuscarPorCategoria extends javax.swing.JInternalFrame {
+public class BuscarPorDescripcion extends javax.swing.JInternalFrame {
     
     private DefaultTableModel modelo = new DefaultTableModel(){
-    @Override
     public boolean isCellEditable(int fila, int columna){ //Metodo que permite editar filas o columna.
         return false;//En este caso no
     }
     };
     /**
-     * Creates new form BuscarPorRubro
+     * Creates new form BuscarPorNombre
      */
-    public BuscarPorCategoria() {
+    public BuscarPorDescripcion() {
         initComponents();
-        cargarCombo();
         armarTabla();
     }
 
@@ -42,53 +40,32 @@ public class BuscarPorCategoria extends javax.swing.JInternalFrame {
 
         jpPanelPrincipal = new javax.swing.JPanel();
         lbTitulo = new javax.swing.JLabel();
-        jPanel1 = new javax.swing.JPanel();
-        jcbCategorias = new javax.swing.JComboBox<>();
-        lbRubro = new javax.swing.JLabel();
+        lbIngreseDescripcion = new javax.swing.JLabel();
+        txtDescripcion = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         jtTablaProductos = new javax.swing.JTable();
         btSalir = new javax.swing.JButton();
 
         jpPanelPrincipal.setBackground(new java.awt.Color(165, 186, 226));
 
-        lbTitulo.setFont(new java.awt.Font("Arial Black", 0, 28)); // NOI18N
+        lbTitulo.setFont(new java.awt.Font("Arial", 1, 28)); // NOI18N
         lbTitulo.setForeground(new java.awt.Color(0, 102, 102));
         lbTitulo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lbTitulo.setText("Buscar por Rubro (Categoria)");
+        lbTitulo.setText("Listado por Descripcion");
+        lbTitulo.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
+        lbTitulo.setIconTextGap(50);
 
-        jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        lbIngreseDescripcion.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        lbIngreseDescripcion.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lbIngreseDescripcion.setText("Ingrese descripcion:");
 
-        jcbCategorias.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "SELECCIONE" }));
-        jcbCategorias.addItemListener(new java.awt.event.ItemListener() {
-            public void itemStateChanged(java.awt.event.ItemEvent evt) {
-                jcbCategoriasItemStateChanged(evt);
+        txtDescripcion.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        txtDescripcion.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        txtDescripcion.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtDescripcionKeyTyped(evt);
             }
         });
-
-        lbRubro.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        lbRubro.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        lbRubro.setText("Rubro:");
-
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(24, 24, 24)
-                .addComponent(lbRubro, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jcbCategorias, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(24, Short.MAX_VALUE))
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(16, 16, 16)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jcbCategorias, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lbRubro, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE))
-                .addContainerGap(20, Short.MAX_VALUE))
-        );
 
         jScrollPane1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
@@ -108,7 +85,6 @@ public class BuscarPorCategoria extends javax.swing.JInternalFrame {
         btSalir.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         btSalir.setForeground(new java.awt.Color(0, 153, 153));
         btSalir.setText("Salir");
-        btSalir.setToolTipText("");
         btSalir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btSalirActionPerformed(evt);
@@ -120,36 +96,37 @@ public class BuscarPorCategoria extends javax.swing.JInternalFrame {
         jpPanelPrincipalLayout.setHorizontalGroup(
             jpPanelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jpPanelPrincipalLayout.createSequentialGroup()
+                .addGap(21, 21, 21)
                 .addGroup(jpPanelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jpPanelPrincipalLayout.createSequentialGroup()
-                        .addContainerGap(26, Short.MAX_VALUE)
-                        .addGroup(jpPanelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 530, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(jpPanelPrincipalLayout.createSequentialGroup()
-                                .addGap(123, 123, 123)
-                                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(lbIngreseDescripcion, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(btSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(txtDescripcion, javax.swing.GroupLayout.PREFERRED_SIZE, 268, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jpPanelPrincipalLayout.createSequentialGroup()
-                        .addGap(94, 94, 94)
-                        .addComponent(lbTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, 470, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(19, 19, 19))
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 538, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(btSalir, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)))
+                .addGap(16, 16, 16))
+            .addGroup(jpPanelPrincipalLayout.createSequentialGroup()
+                .addGap(176, 176, 176)
+                .addComponent(lbTitulo)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jpPanelPrincipalLayout.setVerticalGroup(
             jpPanelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpPanelPrincipalLayout.createSequentialGroup()
-                .addContainerGap()
+            .addGroup(jpPanelPrincipalLayout.createSequentialGroup()
+                .addGap(23, 23, 23)
+                .addComponent(lbTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(27, 27, 27)
                 .addGroup(jpPanelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(btSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jpPanelPrincipalLayout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(btSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jpPanelPrincipalLayout.createSequentialGroup()
-                        .addComponent(lbTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 7, Short.MAX_VALUE)
-                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 296, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(37, 37, 37))
+                        .addGroup(jpPanelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lbIngreseDescripcion, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtDescripcion, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 320, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(35, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -163,7 +140,7 @@ public class BuscarPorCategoria extends javax.swing.JInternalFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+            .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jpPanelPrincipal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
@@ -178,24 +155,28 @@ public class BuscarPorCategoria extends javax.swing.JInternalFrame {
         setVisible(false);
     }//GEN-LAST:event_btSalirActionPerformed
 
-    private void jcbCategoriasItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jcbCategoriasItemStateChanged
+    private void txtDescripcionKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtDescripcionKeyTyped
         // TODO add your handling code here:
-          if(evt.getStateChange() == jcbCategorias.getSelectedIndex()){
-          cargarTabla();
-      }
-    }//GEN-LAST:event_jcbCategoriasItemStateChanged
+        String desc = txtDescripcion.getText();
+        System.out.println(desc);
+        cargarTabla(desc);
+    }//GEN-LAST:event_txtDescripcionKeyTyped
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btSalir;
-    private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JComboBox<String> jcbCategorias;
     private javax.swing.JPanel jpPanelPrincipal;
     private javax.swing.JTable jtTablaProductos;
-    private javax.swing.JLabel lbRubro;
+    private javax.swing.JLabel lbIngreseDescripcion;
     private javax.swing.JLabel lbTitulo;
+    private javax.swing.JTextField txtDescripcion;
     // End of variables declaration//GEN-END:variables
+private void validarCampos(){
+    if(txtDescripcion.equals(false)){
+    JOptionPane.showMessageDialog(null, "Usted no ha ingresado una descripcion!!!!");
+    }
+}
 private void armarTabla(){
   modelo.addColumn("Codigo");
   modelo.addColumn("Descripcion");
@@ -204,13 +185,11 @@ private void armarTabla(){
   modelo.addColumn("Stock");
   jtTablaProductos.setModel(modelo);
 }
-private void cargarTabla(){
+private void cargarTabla(String c){
     borrarTabla();
-    String catSel = (String) jcbCategorias.getSelectedItem();    
-    for(Producto p: Menu.superPC.filtrarPorCategoria(catSel)){
+    for(Producto p: Menu.superPC.filtrarPorDescripcion(c)){
         modelo.addRow(new Object[]{p.getCodigo(), p.getDescripcion(), p.getPrecio(), p.getRubro(), p.getStock()});
     }
-    
 }
 private void borrarTabla(){
     int ind = modelo.getRowCount() -1 ;
@@ -218,10 +197,4 @@ private void borrarTabla(){
      modelo.removeRow(i);
     }
 }
-private void cargarCombo(){
-    for(String cat: Menu.categorias.getCategorias()){
-        jcbCategorias.addItem(cat);
-    }
-}
-
 }

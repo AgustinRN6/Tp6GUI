@@ -1,74 +1,78 @@
-
 package Clases;
 
-import java.util.ArrayList;
-import java.util.HashSet;
+import java.util.Collections;
+import java.util.Iterator;
 import java.util.Map;
-import java.util.TreeMap;
 
+import java.util.TreeSet;
 
 public class Super {
-    private TreeMap<Long,Producto> productos = new TreeMap(); // TreeMap<codigo,Producto>;
+
+    private TreeSet<Producto> productos = new TreeSet(Producto.compararPorCodigo); // TreeMap<codigo,Producto>;
 
     public Super() {
     }
-    
-    
-//METODO PARA AGREGAR PRODUCTO AL ARREGLO     
-public void agregarProducto(Long cod, Producto pr){
-       if(productos.containsKey(cod)){
-           System.out.println("Ese codigo ya esta en uso");
-       }else{
-       productos.put(cod, pr);//lo agrega al arreglo
-        System.out.println("CLIENTE AGREGADO");
-       }
-          
-}
-//METODO QUE REMUEVE UN PRODUCTO POR EL CODIGO
-public void borrarProducto(Long cod){
-    productos.remove(cod);
-    System.out.println("Producto Removido");
-}
-//METODO QUE ME RETORNA EL ARREGLO CON TODOS LOS ELEMENTOS
-public TreeMap<Long,Producto> getProductos(){
-    return productos;
-}
-//METODO QUE FILTRA PRODUCTOS SEGUN LA CATEGORIA
-public TreeMap<Long,Producto> filtrarPorCategoria(String cat){ 
-    TreeMap<Long, Producto>productosCat = new TreeMap();
-    //recorremos los elementos del treemap. pero solo los valores del treemap no las llaves.
-    for(Map.Entry<Long, Producto> pro: productos.entrySet()){
-        //el .equals equivale a decir = si este es igual a este. entra en el bloque de abajo
-        if(pro.getValue().getRubro().equals(cat)){//si las dos categorias coinciden
-            productosCat.put(pro.getKey(), pro.getValue());//se agrega el producto a la lista.
-        }
-    }
-    return productosCat;//retorna el arreglo.
-}
-//METODO QUE FILTRA PRODUCTOS SEGUN EL NOMBRE
-public TreeMap<Long, Producto> filtrarPorNombre(String descr){
-    TreeMap<Long,Producto>productosNom = new TreeMap();
-    
-        for(Map.Entry<Long,Producto> pro: productos.entrySet()){
-            if(pro.getValue().getDescripcion().startsWith(descr)){
-                productosNom.put(pro.getKey(), pro.getValue());
-               
-            }
-        }
-    return productosNom;
-}
 
-public TreeMap<Long,Producto> filtrarPorPrecio(Double precioA, Double precioB){
-    //ejemplo de precio: entre precioA(2500) y precioB(3000)
-    //la lista me retornara productos que esten entre esos dos precios o sean iguales.
-    TreeMap<Long, Producto>productosPr = new TreeMap();
+//METODO PARA AGREGAR PRODUCTO AL ARREGLO     
+    public void agregarProducto(Producto pr) {
+
+        productos.add(pr);//lo agrega al arreglo
+        System.out.println("PRODUCTO AGREGADO");
+
+    }
+//METODO QUE REMUEVE UN PRODUCTO POR EL CODIGO
+
+    public void borrarProducto(Producto p) {
+        productos.remove(p);
+        System.out.println("PRODUCTO BORRADO");
         
-        for(Map.Entry<Long, Producto> pro: productos.entrySet()){
-        //Si el precio es mayor o igual al precioA y  si menor o igual al precioB.
-            if(pro.getValue().getPrecio() >= precioA & pro.getValue().getPrecio() <= precioB){
-                productosPr.put(pro.getKey(),pro.getValue());//agrega el producto a la lista
+    }
+//METODO QUE ME RETORNA EL ARREGLO CON TODOS LOS ELEMENTOS
+
+    public TreeSet<Producto> getProductos() {
+        return productos;
+    }
+
+//METODO QUE FILTRA PRODUCTOS SEGUN LA CATEGORIA
+    public TreeSet<Producto> filtrarPorCategoria(String cat) {
+        TreeSet<Producto> productosCat = new TreeSet(Producto.compararPorCodigo);
+        //recorremos los elementos del treemap. pero solo los valores del treemap no las llaves.
+        for (Producto pro : productos) {
+            //el .equals equivale a decir = si este es igual a este. entra en el bloque de abajo
+            if (pro.getRubro().equals(cat)) {//si las dos categorias coinciden
+                productosCat.add(pro);//se agrega el producto a la lista.
             }
         }
-    return productosPr;
-}
+        return productosCat;//retorna el arreglo.
+    }
+//METODO QUE FILTRA PRODUCTOS SEGUN LA DESCRIPCION
+
+    public TreeSet<Producto> filtrarPorDescripcion(String descr) {
+
+        TreeSet<Producto> productosNom = new TreeSet(Producto.compararPorCodigo);
+        for (Producto pro : productos) {
+            //Setea todo a minusculas
+            String minusA = pro.getDescripcion().toLowerCase();
+            String minusB = descr.toLowerCase();
+            if (minusA.startsWith(minusB)) {
+                productosNom.add(pro);
+            }
+        }
+        return productosNom;
+    }
+
+    public TreeSet<Producto> filtrarPorPrecio(Double precioA, Double precioB) {
+        //ejemplo de precio: entre precioA(2500) y precioB(3000)
+        //la lista me retornara productos que esten entre esos dos precios o sean iguales.
+        TreeSet<Producto> productosPr = new TreeSet(Producto.compararPorCodigo);
+
+        for (Producto pro : productos) {
+            //Si el precio es mayor o igual al precioA y  si menor o igual al precioB.
+            if (pro.getPrecio() >= precioA & pro.getPrecio() <= precioB) {
+                productosPr.add(pro);//agrega el producto a la lista
+            }
+        }
+        return productosPr;
+    }
+
 }

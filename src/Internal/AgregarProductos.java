@@ -311,6 +311,7 @@ public class AgregarProductos extends javax.swing.JInternalFrame {
             } else {
                 //Se agrega el objeto con la seleccion de la categoria, y los datos ingresados por el usuario        
                 //Se carga producto en el TreeSet intermedio, necesita actualizarse para guardarse en la base de datos
+                Menu.superPC.agregarProducto(p);
                 buffer.add(p);
                 JOptionPane.showMessageDialog(null, "Se agregó con éxito el producto, actualice por favor");
                 //Se inhabilita el botón guardar hasta que se clickee en Nuevo.
@@ -513,13 +514,14 @@ public class AgregarProductos extends javax.swing.JInternalFrame {
         }
         //Toma el código del producto seleccionado de la tabla
         Integer codigo = (Integer) modeloTabla.getValueAt(jtTabla.getSelectedRow(), columnaCodigo);
-
+        
         Iterator<Producto> iterar = Menu.productos.iterator();
         
         //Se remueve el producto con el código que previamente se había seleccionado
         while (iterar.hasNext()) {
             Producto p = iterar.next();
             if (p.getCodigo().equals(codigo)) {
+                Menu.superPC.borrarProducto(p);
                 Menu.productos.remove(p);
                 JOptionPane.showMessageDialog(null, "Se la eliminado el producto con éxito");
                 yaEliminado = false;

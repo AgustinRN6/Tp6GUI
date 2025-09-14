@@ -26,6 +26,7 @@ public class BuscarPorPrecio extends javax.swing.JInternalFrame {
      */
     public BuscarPorPrecio() {
         initComponents();
+        armarTabla();
     }
 
     /**
@@ -69,9 +70,6 @@ public class BuscarPorPrecio extends javax.swing.JInternalFrame {
 
         txtPrecioB.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         txtPrecioB.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                txtPrecioBKeyPressed(evt);
-            }
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 txtPrecioBKeyReleased(evt);
             }
@@ -167,14 +165,13 @@ public class BuscarPorPrecio extends javax.swing.JInternalFrame {
             jpPanelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jpPanelPrincipalLayout.createSequentialGroup()
                 .addGap(21, 21, 21)
-                .addGroup(jpPanelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(btSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jpPanelPrincipalLayout.createSequentialGroup()
-                        .addComponent(lbTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addComponent(lbTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jpPanelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btSalir, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(47, Short.MAX_VALUE))
         );
 
@@ -206,14 +203,16 @@ public class BuscarPorPrecio extends javax.swing.JInternalFrame {
 
     private void txtPrecioBKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPrecioBKeyReleased
         // TODO add your handling code here:
-        System.out.println(evt.getKeyChar());
-        validarCampos();
+               try{
+        Double precioA = Double.valueOf(txtPrecioA.getText());
+           
+        Double precioB = Double.valueOf(txtPrecioB.getText());
+            System.out.println(txtPrecioB.getText().toString()+ txtPrecioA.getText().toString());
+        cargarTabla(precioA, precioB);
+    }catch(java.lang.NumberFormatException error){
+        JOptionPane.showMessageDialog(null, "Usted ingreso el precio en el formato equivocado!!!!");
+    }
     }//GEN-LAST:event_txtPrecioBKeyReleased
-
-    private void txtPrecioBKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPrecioBKeyPressed
-        // TODO add your handling code here:
-        System.out.println(evt.getKeyChar());
-    }//GEN-LAST:event_txtPrecioBKeyPressed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -239,12 +238,8 @@ private void armarTabla(){
 }
 private void cargarTabla(Double precioA, Double precioB){
     borrarTabla();
-    for(Map.Entry<Long, Producto>produ: Menu.superPC.filtrarPorPrecio(precioA, precioB).entrySet()){
-        String descr= produ.getValue().getDescripcion();
-        String cate= produ.getValue().getRubro();
-        Integer stock = produ.getValue().getStock();
-        Double precio = produ.getValue().getPrecio();
-        modelo.addRow(new Object[]{produ.getKey(),descr, cate, stock, precio});
+    for(Producto p: Menu.superPC.filtrarPorPrecio(precioA, precioB)){
+        modelo.addRow(new Object[]{p.getCodigo(), p.getDescripcion(), p.getPrecio(), p.getRubro(), p.getStock()});
     }
     
 }
@@ -254,15 +249,5 @@ private void borrarTabla(){
      modelo.removeRow(i);
     }
 }
-private void validarCampos(){
-    try{
-    Double precioA = Double.valueOf(txtPrecioA.getText());
-    Double precioB = Double.valueOf(txtPrecioB.getText());
-    
-    cargarTabla(precioA, precioB);
-    
-    }catch(java.lang.NumberFormatException error){
-        JOptionPane.showMessageDialog(null, "Usted ingreso el precio en el formato equivocado!!!!");
-    }
-}
+
 }
