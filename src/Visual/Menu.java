@@ -173,7 +173,7 @@ public class Menu extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(() -> new Menu().setVisible(true));
     }
-
+    public static CategoriasData categorias = new CategoriasData();
     public static Super superPC = new Super();
     public static TreeSet<Producto> productos = new TreeSet<>(Producto.compararPorCodigo);    
     // Variables declaration - do not modify//GEN-BEGIN:variables

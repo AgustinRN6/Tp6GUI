@@ -34,13 +34,13 @@ public TreeMap<Long,Producto> getProductos(){
     return productos;
 }
 //METODO QUE FILTRA PRODUCTOS SEGUN LA CATEGORIA
-public ArrayList<Producto> filtrarPorCategoria(String cat){ 
-    ArrayList<Producto>productosCat = new ArrayList();
+public TreeMap<Long,Producto> filtrarPorCategoria(String cat){ 
+    TreeMap<Long, Producto>productosCat = new TreeMap();
     //recorremos los elementos del treemap. pero solo los valores del treemap no las llaves.
-    for(Producto pro: productos.values()){
+    for(Map.Entry<Long, Producto> pro: productos.entrySet()){
         //el .equals equivale a decir = si este es igual a este. entra en el bloque de abajo
-        if(pro.getRubro().equals(cat)){//si las dos categorias coinciden
-            productosCat.add(pro);//se agrega el producto a la lista.
+        if(pro.getValue().getRubro().equals(cat)){//si las dos categorias coinciden
+            productosCat.put(pro.getKey(), pro.getValue());//se agrega el producto a la lista.
         }
     }
     return productosCat;//retorna el arreglo.
@@ -58,15 +58,15 @@ public TreeMap<Long, Producto> filtrarPorNombre(String descr){
     return productosNom;
 }
 
-public ArrayList<Producto> filtrarPorPrecio(Double precioA, Double precioB){
+public TreeMap<Long,Producto> filtrarPorPrecio(Double precioA, Double precioB){
     //ejemplo de precio: entre precioA(2500) y precioB(3000)
     //la lista me retornara productos que esten entre esos dos precios o sean iguales.
-    ArrayList<Producto>productosPr = new ArrayList();
+    TreeMap<Long, Producto>productosPr = new TreeMap();
         
-        for(Producto pro: productos.values()){
+        for(Map.Entry<Long, Producto> pro: productos.entrySet()){
         //Si el precio es mayor o igual al precioA y  si menor o igual al precioB.
-            if(pro.getPrecio() >= precioA & pro.getPrecio() <= precioB){
-                productosPr.add(pro);//agrega el producto a la lista
+            if(pro.getValue().getPrecio() >= precioA & pro.getValue().getPrecio() <= precioB){
+                productosPr.put(pro.getKey(),pro.getValue());//agrega el producto a la lista
             }
         }
     return productosPr;

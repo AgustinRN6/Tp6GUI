@@ -44,8 +44,8 @@ public class MainTest {
    
     //FILTRAR POR CATEGORIA
         System.out.println("METODO FILTRAR POR CATEGORIA");
-    for(Producto p:  DeTodoSA.filtrarPorCategoria("Electrodomestico")){
-        System.out.println(p.getProducto());
+    for(Map.Entry<Long,Producto> p:  DeTodoSA.filtrarPorCategoria("Electrodomestico").entrySet()){
+        System.out.println(p.getValue().getProducto());
     }
         System.out.println(".........................................................");
     //FILTRAR POR NOMBRE
@@ -58,9 +58,20 @@ public class MainTest {
         System.out.println("METODO FILTRAR POR PRECIO ENTRE 3.700 HASTA 400.000");
     double precioA = 3.700;
     double precioB = 400.000;
-    for(Producto p: DeTodoSA.filtrarPorPrecio(precioA, precioB)){
-        System.out.println(p.getProducto());
+    for(Map.Entry<Long, Producto> p: DeTodoSA.filtrarPorPrecio(precioA, precioB).entrySet()){
+        System.out.println(p.getValue().getProducto());
     }
           System.out.println(".........................................................");
+    //METODO PARA BORRAR
+        System.out.println("METODO QUE BORRA EL PRODUCTO DE LA LISTA");
+    DeTodoSA.borrarProducto(cod6);
+    DeTodoSA.borrarProducto(cod5);
+    DeTodoSA.borrarProducto(cod4);
+    DeTodoSA.borrarProducto(cod3);
+    for(Map.Entry<Long, Producto> productos:DeTodoSA.getProductos().entrySet()){
+            System.out.println("Codigo: "+ productos.getKey()+"Producto: "+ productos.getValue().getProducto());
+        }
+    System.out.println(".........................................................");
     }
+    
 }
