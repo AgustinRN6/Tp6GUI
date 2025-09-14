@@ -314,19 +314,29 @@ public class AgregarProductos extends javax.swing.JInternalFrame {
 
     private void jbActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbActualizarActionPerformed
         //Se realiza la carga de datos del estado intermedio a la base de datos de Productos.  
-        boolean productosRepetidos = false;
-        for(Producto bufferP: buffer) {
-            Menu.productos.add(bufferP);
+        if (buffer.isEmpty()) {
+            JOptionPane.showMessageDialog(null, "No hay productos para cargar");
+        } else {
+            for (Producto bufferP : buffer) {
+                Menu.productos.add(bufferP);
+            }
+            JOptionPane.showMessageDialog(null, "Se realizó con éxito la actualización");
+            //Se actualiza la tabla
+            cargarProductos();
+            //Se limpia el buffer
+            buffer.clear(); 
         }
-        JOptionPane.showMessageDialog(null, "Se realizó con éxito la actualización");
-        //Se actualiza la tabla
-        cargarProductos();
-        //Se limpia el buffer
-        buffer.clear();
+
     }//GEN-LAST:event_jbActualizarActionPerformed
 
     private void jbEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbEliminarActionPerformed
-        // TODO add your handling code here:
+        //Se utiliza para eliminar un Producto de la base de datos
+        try {
+            eliminarProducto();
+        }catch(ArrayIndexOutOfBoundsException e) {
+            JOptionPane.showMessageDialog(null, "No hay producto seleccionado para eliminar");
+        }
+
     }//GEN-LAST:event_jbEliminarActionPerformed
 
     private void jbCerrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbCerrarActionPerformed
@@ -339,7 +349,7 @@ public class AgregarProductos extends javax.swing.JInternalFrame {
             //Si el usuario coloca la opción SI, el valor da 0, se cierra la ventana.
             int si_no = JOptionPane.showConfirmDialog(null, 
                         "Si no actualiza, lo último registrado se perderá, ¿Desea continuar?",
-                        "ADVERTENCIA", JOptionPane.YES_NO_OPTION, JOptionPane.INFORMATION_MESSAGE);
+                        "ADVERTENCIA", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
             if (si_no == 0) {
                 System.out.println(evt.getActionCommand());
                 setVisible(false); //Se cierra la ventana
@@ -459,6 +469,40 @@ public class AgregarProductos extends javax.swing.JInternalFrame {
         }
         //Si no se encuentra un código identico, retorna falso
         return esIgual;
+    }
+    
+    //Metodo para eliminar Producto seleccionado de la tabla
+    private void eliminarProducto() {
+        
+        //Es para corroborar si el objeto ya fue eliminado anteriormente (puede seguir en la tabla)
+        boolean yaEliminado = true;
+        //Es el numero de la columna que tiene el nombre "Codigo"
+        int columnaCodigo = 0;
+        //Busca cual es la columna correspodniente
+        for (int i = 0; i < modeloTabla.getColumnCount(); i++) {
+            if (modeloTabla.getColumnName(i).equalsIgnoreCase("Codigo")) {
+                columnaCodigo = i;
+            }
+        }
+        //Toma el código del producto seleccionado de la tabla
+        Integer codigo = (Integer) modeloTabla.getValueAt(jtTabla.getSelectedRow(), columnaCodigo);
+
+        Iterator<Producto> iterar = Menu.productos.iterator();
+        
+        //Se remueve el producto con el código que previamente se había seleccionado
+        while (iterar.hasNext()) {
+            Producto p = iterar.next();
+            if (p.getCodigo().equals(codigo)) {
+                Menu.productos.remove(p);
+                JOptionPane.showMessageDialog(null, "Se la eliminado el producto con éxito");
+                yaEliminado = false;
+            }
+        }
+        if (yaEliminado) {
+            JOptionPane.showMessageDialog(null, "El producto ya fue eliminado, seleccione otro");
+        }
+        
+        
     }
     
     //Evento cuando se crea la ventana
