@@ -8,6 +8,7 @@ import java.beans.PropertyVetoException;
 import java.util.Iterator;
 import java.util.TreeSet;
 import javax.swing.JOptionPane;
+import javax.swing.JScrollPane;
 
 public class AgregarProductos extends javax.swing.JInternalFrame {
     //Se crea el modelo de la tabla, y se reemplaza el valor de celda editable a falso
@@ -192,6 +193,11 @@ public class AgregarProductos extends javax.swing.JInternalFrame {
         });
 
         jbGuardar.setText("Guardar");
+        jbGuardar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                jbGuardarMouseEntered(evt);
+            }
+        });
         jbGuardar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jbGuardarActionPerformed(evt);
@@ -296,20 +302,25 @@ public class AgregarProductos extends javax.swing.JInternalFrame {
             } else if (stock <= 0) {
                 //Se evalua si el stock es 0 o menos
                 JOptionPane.showMessageDialog(null, "Tiene que ser minimo de 1 el stock");
+            } else if (precio <= 0) {
+                //Se evalua que el precio no sea menor o igual que cero
+                JOptionPane.showMessageDialog(null, "El precio no puede ser 0 o negativo");
+            } else if (codigo <= 0) {
+                //Se evalua que el codigo no sea 0 o negativo
+                JOptionPane.showMessageDialog(null, "El codigo no puede ser 0 o negativo");
             } else {
                 //Se agrega el objeto con la seleccion de la categoria, y los datos ingresados por el usuario        
                 //Se carga producto en el TreeSet intermedio, necesita actualizarse para guardarse en la base de datos
                 buffer.add(p);
                 JOptionPane.showMessageDialog(null, "Se agregó con éxito el producto, actualice por favor");
+                //Se inhabilita el botón guardar hasta que se clickee en Nuevo.
+                jbGuardar.setEnabled(false); 
             }
 
-        } catch (NumberFormatException e) { //Si en precio el usuario NO coloca un valor numerico
+        } catch (NumberFormatException e) { //Si en precio o código el usuario NO coloca un valor numerico
 
-            JOptionPane.showMessageDialog(null, "En la casilla Precio o Código, debe colocar solo un valor numerico.");
-
-        }
-        
-        
+            JOptionPane.showMessageDialog(null, "Formato incorrecto, debe colocarse un valor numerico en precio y codigo");                           
+        }        
     }//GEN-LAST:event_jbGuardarActionPerformed
 
     private void jbActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbActualizarActionPerformed
@@ -365,12 +376,27 @@ public class AgregarProductos extends javax.swing.JInternalFrame {
         jtfDescripcion.setText("");
         jtfPrecio.setText("");
         jsStock.setValue(0);
+        jbGuardar.setEnabled(true);
     }//GEN-LAST:event_jbNuevoActionPerformed
 
     private void jbBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbBuscarActionPerformed
         //Llama al método cargarProductos para buscar por la categoria seleccionada
         cargarProductos();
     }//GEN-LAST:event_jbBuscarActionPerformed
+
+    private void jbGuardarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jbGuardarMouseEntered
+    /*    float[] coordenadas = {jbGuardar.getAlignmentX(),jbGuardar.getAlignmentY()};
+        javax.swing.JScrollPane ventanaEmergente = new javax.swing.JScrollPane() {
+            @Override
+            public void setEnabled(boolean enabled) {
+                super.setEnabled(false);
+            }
+        };
+        ventanaEmergente.setAlignmentX(coordenadas[0]);
+        ventanaEmergente.setAlignmentX(coordenadas[1]);
+        ventanaEmergente.setEnabled(true);
+     */   
+    }//GEN-LAST:event_jbGuardarMouseEntered
 
     //Se crea para guardar elementos en un estado intermedio (previo a la carga a la base de datos)
     private TreeSet<Producto> buffer = new TreeSet<>(Producto.compararPorCodigo);
@@ -471,6 +497,7 @@ public class AgregarProductos extends javax.swing.JInternalFrame {
         return esIgual;
     }
     
+    
     //Metodo para eliminar Producto seleccionado de la tabla
     private void eliminarProducto() {
         
@@ -519,5 +546,7 @@ public class AgregarProductos extends javax.swing.JInternalFrame {
         //Se cargan los productos en la tabla
         cargarProductos();        
     }
+    
+    
     
 }
